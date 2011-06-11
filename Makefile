@@ -1,6 +1,9 @@
 # This makefile is downloading an archive found in 
 # the 'archive' file already existing in this directory
 # and validating the md5sum of the archive against it.
+ifndef NAME
+$(error "You can not run this Makefile without having NAME defined")
+endif
 
 CURL	?= $(shell if test -f /usr/bin/curl ; then echo "curl -H Pragma: -O -R -S --fail --show-error" ; fi)
 WGET	?= $(shell if test -f /usr/bin/wget ; then echo "wget -nd -m" ; fi)
@@ -12,7 +15,7 @@ SOURCEFILES := $(shell cat archive 2>/dev/null | awk '{ print $$2 }')
 sources: $(SOURCEFILES)
 
 $(SOURCEFILES):
-	$(CLIENT) $(LOOKASIDE_HOST)/$(SOURCEFILES)
+	$(CLIENT) $(LOOKASIDE_HOST)/$(NAME)/$(SOURCEFILES)
 	md5sum -c archive || ( echo 'MD5 check failed' && rm $(SOURCEFILES); exit 1 )
 
 clean:
