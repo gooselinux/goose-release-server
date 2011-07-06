@@ -59,7 +59,7 @@ cat >> $RPM_BUILD_ROOT/etc/rpm/macros.dist << EOF
 # dist macros.
 
 %%goose %{base_release_version}
-%%dist .el%{base_release_version}
+%%dist .gl%{base_release_version}
 %%gl%{base_release_version} 1
 EOF
 
@@ -80,6 +80,12 @@ rm -rf $RPM_BUILD_ROOT
 /etc/rpm/macros.dist
 
 %changelog
+* Thu Jun 9 2011 Clint Savage <clint@gooseproject.org> - 6-6.0.0.40
+- Change dist from el6 to gl6
+
+* Mon Jun 6 2011 Clint Savage <clint@gooseproject.org> - 6-6.0.0.39
+- Rebuild for GoOSe Linux 6.0
+
 * Fri Sep  3 2010 Clint Savage <clint@gooseproject.org> - 6-6.0.0.38
 - Rebuild for GoOSe Linux 6.0
 

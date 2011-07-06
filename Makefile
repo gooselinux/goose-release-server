@@ -1,22 +1,22 @@
-# This makefile is downloading an archive found in 
-# the 'archive' file already existing in this directory
-# and validating the md5sum of the archive against it.
-ifndef NAME
-$(error "You can not run this Makefile without having NAME defined")
-endif
+# This makefile is downloading any file found in 
+# the 'sources' file already existing in this directory
+# and validating the sha256sum of the archive against it.
+NAME := goose-release-server
 
-CURL	?= $(shell if test -f /usr/bin/curl ; then echo "curl -H Pragma: -O -R -S --fail --show-error" ; fi)
-WGET	?= $(shell if test -f /usr/bin/wget ; then echo "wget -nd -m" ; fi)
-CLIENT	?= $(if $(CURL),$(CURL),$(if $(WGET),$(WGET)))
+define find-common-dir
+for d in common ../common ../../common ; do if [ -f $$d/Makefile.common ] ; then echo "$$d"; break ; fi ; done
+endef
+COMMON_DIR := $(shell $(find-common-dir))
 
-LOOKASIDE_HOST := http://herlo.org/misc
-SOURCEFILES := $(shell cat archive 2>/dev/null | awk '{ print $$2 }')
+include $(COMMON_DIR)/Makefile.common
+
+SOURCEFILES := $(shell cat sources 2>/dev/null | awk '{ print $$2 }')
 
 sources: $(SOURCEFILES)
 
 $(SOURCEFILES):
-	$(CLIENT) $(LOOKASIDE_HOST)/$(NAME)/$(SOURCEFILES)
-	md5sum -c archive || ( echo 'MD5 check failed' && rm $(SOURCEFILES); exit 1 )
+	$(CLIENT) $(LOOKASIDE_URI)/$(NAME)/$(SOURCEFILES)
+	sha256sum -c sources || ( echo 'SHA256 check failed' && rm $(SOURCEFILES); exit 1 )
 
 clean:
-	rm goose-release-6.tar.gz
+	rm $(SOURCEFILES)
