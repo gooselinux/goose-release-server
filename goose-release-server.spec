@@ -59,6 +59,7 @@ cat >> $RPM_BUILD_ROOT/etc/rpm/macros.dist << EOF
 # dist macros.
 
 %%goose %{base_release_version}
+%%rhel %{base_release_version}
 %%dist .gl%{base_release_version}
 %%gl%{base_release_version} 1
 EOF
