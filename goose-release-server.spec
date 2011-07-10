@@ -9,7 +9,7 @@
 
 Name:           goose-release%{?variant_lowercase:-%{variant_lowercase}}
 Version:        6%{variant_titlecase}
-Release:        6.0.0.40.gl6
+Release:        6.0.0.41.gl6
 Summary:        %{product_family}%{?variant_titlecase: %{variant_titlecase}} release file
 Group:          System Environment/Base
 License:        GPLv2
@@ -81,13 +81,16 @@ rm -rf $RPM_BUILD_ROOT
 /etc/rpm/macros.dist
 
 %changelog
+* Sat Jul 10 2011 Clint Savage <clint@gooseproject.org> - 6-6.0.0.41
+- Added %%rhel tag to macros.dist
+
 * Thu Jun 9 2011 Clint Savage <clint@gooseproject.org> - 6-6.0.0.40
 - Change dist from el6 to gl6
 
 * Mon Jun 6 2011 Clint Savage <clint@gooseproject.org> - 6-6.0.0.39
-- Rebuild for GoOSe Linux 6.0
+- Rebuild for GoOSe Linux 6.0 #2
 
-* Fri Sep  3 2010 Clint Savage <clint@gooseproject.org> - 6-6.0.0.38
+* Mon Jun 6 2011 Clint Savage <clint@gooseproject.org> - 6-6.0.0.38
 - Rebuild for GoOSe Linux 6.0
 
 * Fri Sep  3 2010 Dennis Gregorovic <dgregor@redhat.com> - 6-6.0.0.37
